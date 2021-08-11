@@ -1,0 +1,47 @@
+{{#if details.objects.object}}
+  <a href="https://apps.db.ripe.net/db-web-ui/query?searchtext={{block.entity.value}}" class="p-link">View in RIPE {{fa-icon "external-link-square" class="external-link-icon"}}</a>
+  {{#each details.objects.object as |object index|}}
+    <h1 class="p-title">
+      Object #{{inc index}}: {{object.type}}
+    </h1>
+    <table class="p-table">
+      <tbody>
+      {{#each object.attributes.attribute as |att|}}
+          <tr>
+              {{#if (eq att.name "inetnum")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=inetnum" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "org")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=organisation" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "admin-c")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=role" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "abuse-c")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=role" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "tech-c")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=role" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "mnt-by")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=mntner" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "mnt-lower")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=mntner" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "mnt-routes")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=mntner" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else if (eq att.name "mnt-ref")}}
+                <td>{{att.name}}</td>
+                <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=mntner" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
+              {{else}}
+                <td>{{att.name}}</td>
+                <td>{{att.value}}</td>
+              {{/if}}
+          </tr>
+      {{/each}}
+      </tbody>
+    </table>
+  {{/each}}
+{{/if}}
