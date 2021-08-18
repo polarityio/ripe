@@ -37,7 +37,11 @@
                 <td><a href="https://apps.db.ripe.net/db-web-ui/lookup?source=ripe&key={{att.value}}&type=mntner" class="p-link"> {{att.value}} {{fa-icon "external-link-square" class="external-link-icon"}}</a></td>
               {{else}}
                 <td>{{att.name}}</td>
-                <td>{{att.value}}</td>
+                {{#if (or (eq att.name "created") (eq att.name "last-modified"))}}
+                  <td>{{moment-format att.value "MM/DD/YYYY HH:mm:ss" timeZone=timezone}}</td>
+                {{else}}
+                  <td>{{att.value}}</td>
+                {{/if}}
               {{/if}}
           </tr>
       {{/each}}
