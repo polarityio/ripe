@@ -113,35 +113,18 @@ function doLookup(entities, options, cb) {
 
 function getSummaryTags(body) {
   const tags = [];
+
   let nameField, descField, countryField;
+  const att = fp.get('objects.object.0.attributes.attribute', body)
+  const getTagName = (tagName) => fp.flow(fp.find(fp.flow(fp.get('name'), fp.equals(tagName))), fp.get('value'))(att);
 
-  if (body.objects.object.length > 0) {
-    const object = body.objects.object[0];
-
-    if (object && object.attributes.attribute.length > 0) {
-      const att = object.attributes.attribute;
-      nameField = fp.flow(
-        fp.find(fp.flow(fp.get('name'), fp.equals('netname'))),
-        fp.get('value'),
-      )(att);
-      descField = fp.flow(
-        fp.find(fp.flow(fp.get('name'), fp.equals('descr'))),
-        fp.get('value'),
-      )(att);
-      countryField = fp.flow(
-        fp.find(fp.flow(fp.get('name'), fp.equals('country'))),
-        fp.get('value'),
-      )(att);
-      if (nameField) {
-        tags.push(nameField);
-      }
-      if (descField) {
-        tags.push(descField);
-      }
-      if (countryField) {
-        tags.push(countryField);
-      }
-    }
+  if (fp.size(att)) {
+    nameField = getTagName('netname');
+    descField = getTagName('descr');
+    countryField = getTagName('country');
+    if (nameField) tags.push(nameField);
+    if (descField) tags.push(descField);
+    if (countryField) tags.push(countryField);
   }
 
   return tags;
