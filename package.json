@@ -1,7 +1,7 @@
 {
   "main": "./integration.js",
   "name": "ripe",
-  "version": "3.0.0-beta",
+  "version": "3.0.1-beta",
   "license": "MIT",
   "private": true,
   "dependencies": {
